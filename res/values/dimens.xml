@@ -8,4 +8,5 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="menubar_height">50px</dimen>
     <dimen name="login_txt_width">150dp</dimen>
+    <dimen name="btn_txt_size">12pt</dimen>
 </resources>

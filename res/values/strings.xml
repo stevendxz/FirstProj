@@ -8,5 +8,16 @@
     <string name="login_pwd">Password</string>
     <string name="login_btn">Login</string>
 
+    <string name="main_menu">Menu</string>
+    <string name="main_option">Option</string>
+    <string name="main_title">Main</string>
+    <string-array name="item_slidmenu">
+        <item>首页</item>
+        <item>关注</item>
+        <item>搜索</item>
+        <item>设置</item>
+        <item>关于</item>
+    </string-array>
+
     <string name="action_settings">Settings</string>
 </resources>

@@ -1,29 +1,47 @@
 package com.adtis.fistpproj;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-    private EditText emailEditText = null;
-    private EditText pwdEditText = null;
-    private Button loginButton = null;
-
+    final Context context = this;
+    private DrawerLayout drawerLayout = null;
+    private ListView listView = null;
+    private ActionBarDrawerToggle toggle = null;
+    private CharSequence sequence;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        emailEditText = (EditText) this.findViewById(R.id.login_txt_email);
-        pwdEditText = (EditText) this.findViewById(R.id.login_txt_pwd);
-        loginButton = (Button) this.findViewById(R.id.btn_login);
-        loginButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        DisplayToast("Hello");
+        initView();
+    }
+    private NavActivity navigationView;
+    private void initView() {
+        navigationView = (NavActivity) super.findViewById(R.id.nav_main);
+        navigationView.setTitle("主页");
+        navigationView.setClickCallback(new NavActivity.ClickCallback() {
 
-                DisplayToast("点击了注册按钮");
+            @Override
+            public void onRightClick() {
+                //DisplayToast("点击了右侧按钮!");
+                Intent intent = new Intent();
+                intent.setClass(context, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onBackClick() {
+                DisplayToast("点击了返回按钮!");
+                finish();
             }
         });
     }
