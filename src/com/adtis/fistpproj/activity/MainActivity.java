@@ -1,4 +1,4 @@
-package com.adtis.fistpproj;
+package com.adtis.fistpproj.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import com.adtis.fistpproj.R;
 import com.adtis.fistpproj.adapter.ContentAdapter;
 import com.adtis.fistpproj.model.ContentModel;
 
@@ -26,9 +27,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         drawerLayout = (DrawerLayout)findViewById(R.id.main);
-        leftlayout = (RelativeLayout)findViewById(R.id.main_leftlayout);
+        leftlayout = (RelativeLayout)drawerLayout.findViewById(R.id.main_leftlayout);
         listView = (ListView)leftlayout.findViewById(R.id.left_drawer);
-        DisplayToast("Hello");
+        //DisplayToast("Hello");
         initView();
         adapter = new ContentAdapter(this, list);
         listView.setAdapter(adapter);

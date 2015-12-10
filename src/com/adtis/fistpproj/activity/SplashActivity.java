@@ -1,9 +1,10 @@
-package com.adtis.fistpproj;
+package com.adtis.fistpproj.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import com.adtis.fistpproj.R;
 
 /**
  * Created by Administrator on 2015/12/8.

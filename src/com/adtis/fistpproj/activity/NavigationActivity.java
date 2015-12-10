@@ -1,4 +1,4 @@
-package com.adtis.fistpproj;
+package com.adtis.fistpproj.activity;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.adtis.fistpproj.R;
 
 public class NavigationActivity extends LinearLayout {
     private Button btn_left;

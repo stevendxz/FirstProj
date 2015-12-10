@@ -3,7 +3,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#ffffff"
+                android:background="@android:color/holo_blue_light"
                 android:theme="@android:style/Theme.NoTitleBar">
     <TextView android:id="@+id/copy_right"
               android:layout_width="wrap_content"
@@ -26,12 +26,7 @@
                 <ImageView android:id="@+id/jay_studio_icon"
                            android:layout_width="110dip"
                            android:layout_height="130dip"
-                           android:src="@drawable/ic_launcher"/>
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/jay_studio_icon"
-                        android:src="@drawable/ic_launcher"/>
+                           android:src="@drawable/logo"/>
             </RelativeLayout>
             <LinearLayout android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
