@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/main"
+        android:id="@+id/main_drawerlayout"
         android:background="@android:color/white"
         android:theme="@android:style/Theme.NoTitleBar">
     <FrameLayout
@@ -23,5 +23,6 @@
             android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:tag="LEFT" />
+            android:tag="LEFT"
+            tools:layout="@layout/menu_activity"/>
 </android.support.v4.widget.DrawerLayout>

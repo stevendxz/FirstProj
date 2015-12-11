@@ -12,13 +12,13 @@ public class LoginActivity extends Activity {
     private ImageView btn_left;
     private ImageView btn_right;
     final Context context = this;
+    private NavActivity navgativeView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         initLoginView();
     }
-    private NavActivity navgativeView;
     public void initLoginView() {
         navgativeView = (NavActivity)super.findViewById(R.id.nav_login);
         navgativeView.setTitle("Login");

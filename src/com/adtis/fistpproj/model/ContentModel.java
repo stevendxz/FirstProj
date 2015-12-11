@@ -1,7 +1,7 @@
 package com.adtis.fistpproj.model;
 
 public class ContentModel {
-
+	private int id;
 	private int imageView;
 	private String text;
 	
@@ -26,5 +26,4 @@ public class ContentModel {
 	public void setText(String text) {
 		this.text = text;
 	}
-
 }
