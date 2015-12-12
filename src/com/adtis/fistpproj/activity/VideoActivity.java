@@ -75,6 +75,7 @@ public class VideoActivity extends Activity implements View.OnClickListener {
     }
 
     public void init() {
+        //默认播放视频横屏
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         videoView = (VideoView) this.findViewById(R.id.videoView);
         videoView.setMediaController(new MediaController(this));
