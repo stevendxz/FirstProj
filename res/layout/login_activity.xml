@@ -10,20 +10,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     <FrameLayout
-            android:layout_width="329dp"
+            android:layout_width="320dp"
             android:layout_height="159dp"
             android:layout_gravity="center|center"
             android:layout_marginTop="100dp">
-        <TextView
-                android:layout_width="wrap_content"
+        <EditText
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/login_email"
-                android:textColor="@android:color/black"
-                android:id="@+id/login_lbl_email"/>
+                android:padding="10dp"
+                android:inputType="textPassword"
+                android:width="@dimen/login_txt_width"
+                android:id="@+id/login_txt_pwd"
+                android:layout_gravity="end|center_vertical"
+                android:background="@drawable/round_rect"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:width="@dimen/login_txt_width"
+                android:id="@+id/login_txt_email"
+                android:layout_gravity="end|top"
+                android:background="@drawable/round_rect"/>
         <Button
-                android:layout_width="fill_parent"
-                android:layout_height="41dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:text="@string/login_btn"
                 android:id="@+id/btn_login"
                 android:width="@dimen/login_txt_width"
@@ -34,28 +45,22 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/login_pwd"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/darker_gray"
                 android:id="@+id/login_lbl_pwd"
-                android:layout_gravity="start|center_vertical"/>
-        <EditText
-                android:layout_width="250dp"
+                android:layout_gravity="left|center_vertical"/>
+        <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:width="@dimen/login_txt_width"
-                android:id="@+id/login_txt_pwd"
-                android:layout_gravity="end|center_vertical"
-                android:background="@drawable/round_rect"/>
-        <EditText
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                android:width="@dimen/login_txt_width"
-                android:id="@+id/login_txt_email"
-                android:layout_gravity="end|top"
-                android:background="@drawable/round_rect"/>
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/login_email"
+                android:textColor="@android:color/darker_gray"
+                android:id="@+id/login_lbl_email"
+                android:layout_gravity="left|top"/>
     </FrameLayout>
 </LinearLayout>
