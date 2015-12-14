@@ -1,0 +1,283 @@
+package com.adtis.fistpproj.activity;
+
+import android.app.Activity;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.Menu;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import com.adtis.fistpproj.R;
+
+import java.io.IOException;
+
+import android.app.Activity;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+
+public class VideoActivity extends Activity {
+    private SurfaceView surfaceView;
+    private MediaPlayer mplayer;
+    // 记录当前视频的播放位置
+    private int position;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.video_activity);
+        // 创建MediaPlayer对象
+        mplayer = new MediaPlayer();
+        // 获取SurfaceView组件实例
+        surfaceView = (SurfaceView) findViewById(R.id.main_surfaceView);
+        // 设置SurfaceView自己不管理缓冲区
+        surfaceView.getHolder()
+                .setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        // 设置播放时打开屏幕
+        surfaceView.getHolder().setKeepScreenOn(true);
+        surfaceView.getHolder().addCallback(new SurfaceListener());
+    }
+
+    public void click(View v) {
+        try {
+            switch (v.getId()) {
+                case R.id.main_btn_play:
+                    play();
+                    break;
+                case R.id.main_btn_pause:
+                    if (mplayer.isPlaying()) {
+                        mplayer.pause();
+                    } else {
+                        mplayer.start();
+                    }
+                    break;
+                case R.id.main_btn_stop:
+                    if (mplayer.isPlaying())
+                        mplayer.stop();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void play() throws IOException {
+        mplayer.reset();
+        mplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        // 设置需要播放的视频
+        mplayer.setDataSource(Environment.getExternalStorageDirectory()
+                + "/test.mp4");
+        // 把视频画面输出到surfaceView
+        mplayer.setDisplay(surfaceView.getHolder());
+        mplayer.prepare();
+        mplayer.start();
+    }
+
+    private class SurfaceListener implements SurfaceHolder.Callback {
+
+        @Override
+        public void surfaceChanged(SurfaceHolder holder, int format, int width,
+                                   int height) {
+        }
+
+        @Override
+        public void surfaceCreated(SurfaceHolder holder) {
+            if (position > 0) {
+                try {
+                    // 开始播放
+                    play();
+                    // 并直接从指定位置开始播放
+                    mplayer.seekTo(position);
+                    position = 0;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        public void surfaceDestroyed(SurfaceHolder holder) {
+        }
+    }
+
+    // 当其他Activity被打开时
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mplayer.isPlaying()) {
+            // 保存当前的播放位置
+            position = mplayer.getCurrentPosition();
+            mplayer.stop();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 停止播放
+        if (mplayer.isPlaying())
+            mplayer.stop();
+        // 释放资源
+        mplayer.release();
+
+    }
+}
+
+
+
+
+
+/**
+ * 该实例中使用MediaPlayer完成播放，同时界面使用SurfaceView来实现
+ * <p>
+ * 这里我们实现MediaPlayer中很多状态变化时的监听器
+ * <p>
+ * 使用Mediaplayer时，也可以使用MediaController类，但是需要实现MediaController.mediaController接口
+ * 实现一些控制方法。
+ * <p>
+ * 然后，设置controller.setMediaPlayer(),setAnchorView(),setEnabled(),show()就可以了，这里不再实现
+ *
+ * @author Administrator
+ */
+/*
+public class VideoActivity extends Activity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private MediaPlayer media;
+    private boolean playflag = true;
+    private boolean pauseflag = false;
+    private SeekBar seekbar = null;
+    private TextView tv;
+    private SurfaceView suf = null;
+    private SurfaceHolder sufh = null;
+
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.video_activity);
+        tv = (TextView) findViewById(R.id.info);
+        findViewById(R.id.play).setOnClickListener(this);
+        findViewById(R.id.pause).setOnClickListener(this);
+        findViewById(R.id.stop).setOnClickListener(this);
+        suf = (SurfaceView) findViewById(R.id.surface_1);
+        sufh = suf.getHolder(); //获取SurfaceHolder。。。
+        seekbar = (SeekBar) findViewById(R.id.seekbar);
+        sufh.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);//设置SurfaceView的类型...
+        media = new MediaPlayer();
+        try {
+            media.setDataSource("mnt/sdcard//test.mp4");//这里需要把想要播放的文件拷贝到模拟器的sd卡中去...
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private class updateseekbar extends AsyncTask<Integer, Integer, String> {//AsyncTask的使用...
+
+        protected void onPostExecute(String result) {
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+            seekbar.setProgress(progress[0]);
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            // TODO Auto-generated method stub
+            while (VideoActivity.this.playflag) {
+                try {
+                    Thread.sleep(params[0]);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                this.publishProgress(VideoActivity.this.media.getCurrentPosition());
+            }
+            return null;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
+        switch (v.getId()) {
+            case R.id.play: {
+                VideoActivity.this.media.setOnCompletionListener(new OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer arg0) {
+                        // TODO Auto-generated method stub
+                        playflag = false;
+                        media.release();
+                    }
+                });
+                seekbar.setMax(VideoActivity.this.media.getDuration());
+                updateseekbar update = new updateseekbar();
+                //执行者execute
+                update.execute(1000);
+                seekbar.setOnSeekBarChangeListener(this);
+                if (VideoActivity.this.media != null) {
+                    VideoActivity.this.media.stop();
+                }
+                try {
+                    VideoActivity.this.media.prepare();
+                    VideoActivity.this.media.start();
+                    tv.setText("正在播放文件...");
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    tv.setText("文件出现异常...");
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case R.id.pause:
+                if (media != null) {
+                    if (pauseflag) {
+                        media.start();
+                        pauseflag = false;
+                    } else {
+                        media.pause();
+                        pauseflag = true;
+                    }
+                }
+                break;
+            case R.id.stop:
+                if (media != null) {
+                    media.stop();
+                    tv.setText("停止播放文件...");
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress,
+                                  boolean fromUser) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        // TODO Auto-generated method stub
+        media.seekTo(seekbar.getProgress());
+    }
+}*/

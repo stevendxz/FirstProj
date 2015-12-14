@@ -11,14 +11,24 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:hardwareAccelerated="true">
         <activity android:name=".activity.SplashActivity"
+                  android:hardwareAccelerated="true"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.LoginActivity"></activity>
-        <activity android:name=".activity.VideoActivity"></activity>
+        <activity
+                android:name=".activity.MainActivity"/>
+        <activity
+                android:name=".activity.LoginActivity"/>
+        <activity
+                android:name=".activity.VideoActivity"/>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>
