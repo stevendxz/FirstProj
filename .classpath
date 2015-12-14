@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/android-support-v4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/android-support-v7-appcompat"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/nineoldandroids-2.4.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/slidingmenu"/>
+	<classpathentry kind="output" path="out/production/FirstProj"/>
+</classpath>

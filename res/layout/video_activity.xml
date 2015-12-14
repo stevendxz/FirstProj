@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:background="#FFFFFF"
-              android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
     <TextView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="aaa"/>
+            android:layout_height="30dp"
+            android:text="aaa" android:id="@+id/textView"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="test.mp4"/>
+            android:text="test.mp4"
+            android:id="@+id/editText"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true"/>
+    <SurfaceView
+            android:layout_width="fill_parent"
+            android:layout_height="240dip"
+            android:id="@+id/surfaceView"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentStart="true"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:background="#9a000000">
+            android:background="#9a000000"
+            android:layout_alignBottom="@+id/surfaceView"
+            android:layout_alignParentStart="true">
         <ImageView
                 android:id="@+id/play"
                 android:layout_width="30dp"
@@ -46,8 +56,4 @@
                 android:layout_marginTop="15dp"
                 android:src="@drawable/iconfont_stop"/>
     </LinearLayout>
-    <SurfaceView
-            android:layout_width="fill_parent"
-            android:layout_height="240dip"
-            android:id="@+id/surfaceView"/>
-</LinearLayout>
+</RelativeLayout>

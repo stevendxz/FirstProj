@@ -52,7 +52,7 @@ public class MenuLeftFragment extends Fragment {
                         break;
                     case 3:
                         Intent intent = new Intent();
-                        intent.setClass(getActivity(), VideoActivity.class);
+                        intent.setClass(getActivity(), VideoActivity2.class);
                         startActivity(intent);
                     case 4:
                     case 5:

@@ -24,24 +24,32 @@ public class VideoActivity extends Activity {
     private String filename;//当前播放文件的名称
     private int position;//记录播放位置
 
+    private ImageView btn_play;
+    private ImageView btn_pause;
+    private ImageView btn_reset;
+    private ImageView btn_stop;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_activity);
 
         this.mediaPlayer = new MediaPlayer();
-        this.filenameText = (EditText) this.findViewById(R.id.filename);
+        this.filenameText = (EditText) this.findViewById(R.id.editText);
         this.surfaceView = (SurfaceView) this.findViewById(R.id.surfaceView);
-        ImageView playButton = (ImageView) this.findViewById(R.id.play);
-        ImageView pauseButton = (ImageView) this.findViewById(R.id.pause);
-        ImageView resetButton = (ImageButton) this.findViewById(R.id.reset);
-        ImageView stopButton = (ImageView) this.findViewById(R.id.stop);
+        btn_play = (ImageView) this.findViewById(R.id.play);
+        btn_pause = (ImageView) this.findViewById(R.id.pause);
+        btn_reset = (ImageView) this.findViewById(R.id.reset);
+        btn_stop = (ImageView) this.findViewById(R.id.stop);
+        btn_pause.setVisibility(View.INVISIBLE);
+        btn_reset.setVisibility(View.INVISIBLE);
+        btn_stop.setVisibility(View.INVISIBLE);
 
         ButtonClickListener listener = new ButtonClickListener();
-        playButton.setOnClickListener(listener);
-        pauseButton.setOnClickListener(listener);
-        resetButton.setOnClickListener(listener);
-        stopButton.setOnClickListener(listener);
+        btn_play.setOnClickListener(listener);
+        btn_pause.setOnClickListener(listener);
+        btn_reset.setOnClickListener(listener);
+        btn_stop.setOnClickListener(listener);
 
         /*下面设置Surface不维护自己的缓冲区，而是等待屏幕的渲染引擎将内容推送到用户面前*/
         this.surfaceView.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -50,7 +58,7 @@ public class VideoActivity extends Activity {
         this.surfaceView.getHolder().addCallback(new SurfaceListener());
     }
 
-    private class ButtonClickListener implements View.OnClickListener{
+    private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             try {
@@ -58,23 +66,43 @@ public class VideoActivity extends Activity {
                     case R.id.play://来自播放按钮
                         filename = filenameText.getText().toString();
                         play();
+                        btn_play.setVisibility(View.INVISIBLE);
+                        btn_pause.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.pause://来自暂停按钮
-                        if(mediaPlayer.isPlaying()){
-                            mediaPlayer.pause();
-                        }else{
-                            mediaPlayer.start();
+                        if (mediaPlayer.getCurrentPosition() == mediaPlayer.getDuration()) {
+                            mediaPlayer.stop();
+                            btn_play.setVisibility(View.INVISIBLE);
+                            btn_pause.setVisibility(View.INVISIBLE);
+                            btn_reset.setVisibility(View.VISIBLE);
+                        } else if (mediaPlayer.getCurrentPosition() < mediaPlayer.getDuration()) {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.pause();
+                            } else {
+                                mediaPlayer.start();
+                            }
+                            btn_play.setVisibility(View.VISIBLE);
+                            btn_pause.setVisibility(View.INVISIBLE);
+                            btn_reset.setVisibility(View.INVISIBLE);
                         }
                         break;
 
                     case R.id.reset://来自重新播放按钮
-                        if(!mediaPlayer.isPlaying()) play();
+                        if (!mediaPlayer.isPlaying())
+                            play();
                         mediaPlayer.seekTo(0);
+                        btn_play.setVisibility(View.INVISIBLE);
+                        btn_pause.setVisibility(View.VISIBLE);
+                        btn_reset.setVisibility(View.INVISIBLE);
                         break;
 
                     case R.id.stop://来自停止按钮
-                        if(mediaPlayer.isPlaying()) mediaPlayer.stop();
+                        if (mediaPlayer.isPlaying())
+                            mediaPlayer.stop();
+                        btn_play.setVisibility(View.VISIBLE);
+                        btn_pause.setVisibility(View.INVISIBLE);
+                        btn_reset.setVisibility(View.INVISIBLE);
                         break;
                 }
             } catch (Exception e) {
@@ -82,6 +110,7 @@ public class VideoActivity extends Activity {
             }
         }
     }
+
     /**
      * 播放视频
      */
@@ -102,14 +131,15 @@ public class VideoActivity extends Activity {
         //mediaPlayer.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
     }
 
-    private class SurfaceListener implements SurfaceHolder.Callback{
+    private class SurfaceListener implements SurfaceHolder.Callback {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         }
+
         @Override
         public void surfaceCreated(SurfaceHolder holder) {//方法在onResume()后被调用
             Log.i(TAG, "surfaceCreated()");
-            if(position>0 && filename!=null){
+            if (position > 0 && filename != null) {
                 try {
                     play();
                     mediaPlayer.seekTo(position);
@@ -119,6 +149,7 @@ public class VideoActivity extends Activity {
                 }
             }
         }
+
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
             Log.i(TAG, "surfaceDestroyed()");
@@ -127,7 +158,7 @@ public class VideoActivity extends Activity {
 
     @Override
     protected void onPause() {//当其他Activity被打开，停止播放
-        if(mediaPlayer.isPlaying()){
+        if (mediaPlayer.isPlaying()) {
             position = mediaPlayer.getCurrentPosition();//得到播放位置
             mediaPlayer.stop();
         }
@@ -136,7 +167,7 @@ public class VideoActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        if(mediaPlayer.isPlaying()) mediaPlayer.stop();
+        if (mediaPlayer.isPlaying()) mediaPlayer.stop();
         mediaPlayer.release();
         super.onDestroy();
     }
