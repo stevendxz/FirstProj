@@ -81,5 +81,13 @@
                 android:progressDrawable="@drawable/seekbar_style"
                 android:thumb="@drawable/seekbar_thumb" android:indeterminate="false"/>
     </RelativeLayout>
+    <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/video_close"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/iconfont_close"/>
 
 </RelativeLayout>

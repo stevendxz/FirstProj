@@ -17,10 +17,11 @@ public class VideoActivity2 extends Activity {
     private Context context = this;
     private Uri uri;
     private VideoView videoView;
-    private ImageView btn_play, btn_stop, btn_previous, btn_next, btn_fullscreen;
+    private ImageView btn_play, btn_stop, btn_previous, btn_next, btn_fullscreen, btn_close;
     private SeekBar seekbar = null;
     private boolean playflag = true;
     private boolean pauseflag = false;
+    private boolean isFullscreen = false;
 
     private static final String TAG = "VideoActivity";
     // 记录当前视频的播放位置
@@ -33,7 +34,6 @@ public class VideoActivity2 extends Activity {
     }
 
     public void initVideoView() {
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+"/test.mp4");
         videoView = (VideoView)this.findViewById(R.id.videoView);
         //videoView.setMediaController(new MediaController(this));
@@ -45,6 +45,7 @@ public class VideoActivity2 extends Activity {
         btn_previous = (ImageView)findViewById(R.id.previous);
         btn_next = (ImageView)findViewById(R.id.next);
         btn_fullscreen = (ImageView)findViewById(R.id.fullscreen);
+        btn_close = (ImageView)findViewById(R.id.video_close);
 
         seekbar = (SeekBar) findViewById(R.id.seekBar);
 
@@ -54,6 +55,7 @@ public class VideoActivity2 extends Activity {
         btn_previous.setOnClickListener(listener);
         btn_next.setOnClickListener(listener);
         btn_fullscreen.setOnClickListener(listener);
+        btn_close.setOnClickListener(listener);
     }
 
     private class ButtonClickListener implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
@@ -64,9 +66,11 @@ public class VideoActivity2 extends Activity {
                     case R.id.play://来自播放按钮
                         boolean isPlaying = videoView.isPlaying();
                         if(isPlaying) {
+                            playflag = false;
                             videoView.pause();
                             btn_play.setImageResource(R.drawable.iconfont_play);
                         } else {
+                            pauseflag = false;
                             videoView.start();
                             //btn_play.setBackgroundResource(R.drawable.iconfont_pause);
                             btn_play.setImageResource(R.drawable.iconfont_pause);
@@ -79,10 +83,11 @@ public class VideoActivity2 extends Activity {
                         break;
                     case R.id.stop://来自停止按钮
                         videoView.seekTo(0);
+                        playflag = false;
                         videoView.pause();
                         btn_play.setImageResource(R.drawable.iconfont_play);
                         //videoView.stopPlayback();
-                        Toast.makeText(context, "点击了停止按钮", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, "点击了停止按钮", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.previous://来自上一个按钮
                         Toast.makeText(context, "点击了上一个按钮", Toast.LENGTH_LONG).show();
@@ -91,7 +96,18 @@ public class VideoActivity2 extends Activity {
                         Toast.makeText(context, "点击了下一个按钮", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.fullscreen://来自全屏按钮
+                        if(!isFullscreen) {
+                            btn_fullscreen.setImageResource(R.drawable.iconfont_fullscreenexit);
+                            VideoActivity2.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        } else {
+                            btn_fullscreen.setImageResource(R.drawable.iconfont_fullscreen);
+                            VideoActivity2.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        }
                         Toast.makeText(context, "点击了全屏按钮", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.video_close://来自全屏按钮
+
+                        Toast.makeText(context, "点击了退出播放按钮", Toast.LENGTH_LONG).show();
                         break;
                 }
             } catch (Exception e) {
