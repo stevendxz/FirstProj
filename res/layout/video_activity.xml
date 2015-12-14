@@ -7,47 +7,47 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="aaa"
-    />
+            android:text="aaa"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="test.mp4"
-            android:id="@+id/filename"
-    />
+            android:text="test.mp4"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-    >
-        <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/iconfont_play"
+            android:layout_height="60dp"
+            android:background="#9a000000">
+        <ImageView
                 android:id="@+id/play"
-        />
-        <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/iconfont_pause"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/iconfont_play" />
+        <ImageView
                 android:id="@+id/pause"
-        />
-        <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/iconfont_reset"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/iconfont_pause" />
+        <ImageView
                 android:id="@+id/reset"
-        />
-        <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/iconfont_stop"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/iconfont_reset"/>
+        <ImageView
                 android:id="@+id/stop"
-        />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/iconfont_stop"/>
     </LinearLayout>
     <SurfaceView
             android:layout_width="fill_parent"
             android:layout_height="240dip"
-            android:id="@+id/surfaceView"
-    />
+            android:id="@+id/surfaceView"/>
 </LinearLayout>

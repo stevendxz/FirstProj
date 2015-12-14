@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import com.adtis.fistpproj.R;
 
 public class VideoActivity extends Activity {
@@ -31,10 +32,10 @@ public class VideoActivity extends Activity {
         this.mediaPlayer = new MediaPlayer();
         this.filenameText = (EditText) this.findViewById(R.id.filename);
         this.surfaceView = (SurfaceView) this.findViewById(R.id.surfaceView);
-        ImageButton playButton = (ImageButton) this.findViewById(R.id.play);
-        ImageButton pauseButton = (ImageButton) this.findViewById(R.id.pause);
-        ImageButton resetButton = (ImageButton) this.findViewById(R.id.reset);
-        ImageButton stopButton = (ImageButton) this.findViewById(R.id.stop);
+        ImageView playButton = (ImageView) this.findViewById(R.id.play);
+        ImageView pauseButton = (ImageView) this.findViewById(R.id.pause);
+        ImageView resetButton = (ImageButton) this.findViewById(R.id.reset);
+        ImageView stopButton = (ImageView) this.findViewById(R.id.stop);
 
         ButtonClickListener listener = new ButtonClickListener();
         playButton.setOnClickListener(listener);
