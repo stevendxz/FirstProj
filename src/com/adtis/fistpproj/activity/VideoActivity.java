@@ -98,7 +98,7 @@ public class VideoActivity extends Activity {
             }
         });
         mediaPlayer.prepareAsync();
-        mediaPlayer.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
+        //mediaPlayer.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
     }
 
     private class SurfaceListener implements SurfaceHolder.Callback{
