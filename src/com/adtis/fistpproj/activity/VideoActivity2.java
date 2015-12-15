@@ -2,14 +2,15 @@ package com.adtis.fistpproj.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 import com.adtis.fistpproj.R;
 
@@ -19,27 +20,62 @@ public class VideoActivity2 extends Activity {
     private VideoView videoView;
     private ImageView btn_play, btn_stop, btn_previous, btn_next, btn_fullscreen, btn_close;
     private SeekBar seekbar = null;
-    private boolean playflag = true;
-    private boolean pauseflag = false;
+    private boolean video_playflag = true;
+    private boolean video_pauseflag = false;
     private boolean isFullscreen = false;
+    private RelativeLayout video_controlbar;
 
     private static final String TAG = "VideoActivity";
     // 记录当前视频的播放位置
     private int position;
+
+    private ImageView btn_left;
+    private ImageView btn_right;
+    private NavActivity nav_videoplayer;
+    //全屏参数
+    private static final int FLAG_FULLSCREEN = WindowManager.LayoutParams.FLAG_FULLSCREEN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            if (Build.VERSION.SDK_INT < 16) {
+                getWindow().setFlags(FLAG_FULLSCREEN,FLAG_FULLSCREEN);
+            } else {
+                View decorView = getWindow().getDecorView();
+                int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                decorView.setSystemUiVisibility(uiOptions);
+            }
+        }*/
         setContentView(R.layout.video2_activity);
         initVideoView();
     }
 
     public void initVideoView() {
+        nav_videoplayer = (NavActivity)super.findViewById(R.id.nav_videoplayer);
+        nav_videoplayer.setTitle("视频播放");
+        btn_left = (ImageView)nav_videoplayer.findViewById(R.id.iv_nav_back);
+        btn_right = (ImageView)nav_videoplayer.findViewById(R.id.iv_nav_right);
+        btn_left.setImageResource(R.drawable.iconfont_back);
+        btn_right.setVisibility(View.INVISIBLE);
+        video_controlbar = (RelativeLayout)findViewById(R.id.relativeLayout2);
+        nav_videoplayer.setClickCallback(new NavActivity.ClickCallback() {
+            @Override
+            public void onBackClick() {
+                VideoActivity2.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                Intent intent = new Intent();
+                intent.setClass(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onRightClick() {
+
+            }
+        });
         uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+"/test.mp4");
         videoView = (VideoView)this.findViewById(R.id.videoView);
-        //videoView.setMediaController(new MediaController(this));
         videoView.setVideoURI(uri);
-        //videoView.start();
-        //videoView.requestFocus();
         btn_play = (ImageView)findViewById(R.id.play);
         btn_stop = (ImageView)findViewById(R.id.stop);
         btn_previous = (ImageView)findViewById(R.id.previous);
@@ -49,7 +85,7 @@ public class VideoActivity2 extends Activity {
 
         seekbar = (SeekBar) findViewById(R.id.seekBar);
 
-        ButtonClickListener listener = new ButtonClickListener();
+        ButtonClickListener2 listener = new ButtonClickListener2();
         btn_play.setOnClickListener(listener);
         btn_stop.setOnClickListener(listener);
         btn_previous.setOnClickListener(listener);
@@ -58,7 +94,7 @@ public class VideoActivity2 extends Activity {
         btn_close.setOnClickListener(listener);
     }
 
-    private class ButtonClickListener implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private class ButtonClickListener2 implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
         @Override
         public void onClick(View v) {
             try {
@@ -66,24 +102,23 @@ public class VideoActivity2 extends Activity {
                     case R.id.play://来自播放按钮
                         boolean isPlaying = videoView.isPlaying();
                         if(isPlaying) {
-                            playflag = false;
+                            video_playflag = false;
                             videoView.pause();
                             btn_play.setImageResource(R.drawable.iconfont_play);
                         } else {
-                            pauseflag = false;
+                            video_pauseflag = false;
                             videoView.start();
-                            //btn_play.setBackgroundResource(R.drawable.iconfont_pause);
                             btn_play.setImageResource(R.drawable.iconfont_pause);
                         }
                         seekbar.setMax(videoView.getDuration());
-                        UpdateSeekbar update = new UpdateSeekbar();
+                        UpdateSeekbar2 update = new UpdateSeekbar2();
                         //执行者execute
                         update.execute(1000);
                         seekbar.setOnSeekBarChangeListener(this);
                         break;
                     case R.id.stop://来自停止按钮
                         videoView.seekTo(0);
-                        playflag = false;
+                        video_playflag = false;
                         videoView.pause();
                         btn_play.setImageResource(R.drawable.iconfont_play);
                         //videoView.stopPlayback();
@@ -96,18 +131,23 @@ public class VideoActivity2 extends Activity {
                         Toast.makeText(context, "点击了下一个按钮", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.fullscreen://来自全屏按钮
-                        if(!isFullscreen) {
-                            btn_fullscreen.setImageResource(R.drawable.iconfont_fullscreenexit);
-                            VideoActivity2.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                        } else {
-                            btn_fullscreen.setImageResource(R.drawable.iconfont_fullscreen);
-                            VideoActivity2.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                        }
-                        Toast.makeText(context, "点击了全屏按钮", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.video_close://来自全屏按钮
+                        if(!isFullscreen){//设置RelativeLayout的全屏模式
+                            videoFullScreen();
+                            videoView.start();
+                            isFullscreen = true;//改变全屏/窗口的标记
 
-                        Toast.makeText(context, "点击了退出播放按钮", Toast.LENGTH_LONG).show();
+                        }else{//设置RelativeLayout的窗口模式
+                            videoExitFullScreen();
+
+                            isFullscreen = false;//改变全屏/窗口的标记
+                        }
+                        //Toast.makeText(context, "点击了全屏按钮", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.video_close://来自退出播放按钮
+                        videoExitFullScreen();
+
+                        isFullscreen = false;//改变全屏/窗口的标记
+                        //Toast.makeText(context, "点击了退出播放按钮", Toast.LENGTH_LONG).show();
                         break;
                 }
             } catch (Exception e) {
@@ -129,7 +169,28 @@ public class VideoActivity2 extends Activity {
         }
     }
 
-    private class UpdateSeekbar extends AsyncTask<Integer, Integer, String> {//AsyncTask的使用...
+    public void videoFullScreen() {
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
+                RelativeLayout.LayoutParams.FILL_PARENT);
+        videoView.setLayoutParams(layoutParams);
+        btn_fullscreen.setImageResource(R.drawable.iconfont_fullscreenexit);
+        btn_close.setVisibility(View.VISIBLE);
+    }
+
+    public void videoExitFullScreen() {
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, 240);
+        videoView.setLayoutParams(lp);
+        btn_fullscreen.setImageResource(R.drawable.iconfont_fullscreen);
+        btn_close.setVisibility(View.INVISIBLE);
+    }
+
+    private class UpdateSeekbar2 extends AsyncTask<Integer, Integer, String> {//AsyncTask的使用...
         protected void onPostExecute(String result) {
         }
 
@@ -140,7 +201,7 @@ public class VideoActivity2 extends Activity {
         @Override
         protected String doInBackground(Integer... params) {
             // TODO Auto-generated method stub
-            while (playflag) {
+            while (video_playflag) {
                 try {
                     Thread.sleep(params[0]);
                 } catch (InterruptedException e) {

@@ -7,5 +7,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/android-support-v7-appcompat"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/nineoldandroids-2.4.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/slidingmenu"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/percent-support-23.1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jdk1.8"/>
 	<classpathentry kind="output" path="out/production/FirstProj"/>
 </classpath>

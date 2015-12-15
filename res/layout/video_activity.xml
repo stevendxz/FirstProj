@@ -3,57 +3,96 @@
               android:background="#FFFFFF"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:text="aaa" android:id="@+id/textView"/>
-    <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="test.mp4"
-            android:id="@+id/editText"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true"/>
     <SurfaceView
             android:layout_width="fill_parent"
             android:layout_height="240dip"
             android:id="@+id/surfaceView"
-            android:layout_below="@+id/editText"
+            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"/>
-    <LinearLayout
-            android:orientation="horizontal"
+    <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/video_back"
+            android:src="@drawable/iconfont_back"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:visibility="visible"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="test.mp4"
+            android:id="@+id/video_title"
+            android:textColor="@android:color/white"
+            android:layout_alignTop="@+id/video_back"
+            android:layout_toEndOf="@+id/video_back"/>
+    <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:background="#9a000000"
+            android:id="@+id/video_relativeLayout2"
             android:layout_alignBottom="@+id/surfaceView"
             android:layout_alignParentStart="true">
         <ImageView
-                android:id="@+id/play"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/video_play"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/iconfont_play" />
+                android:layout_marginTop="20dp"
+                android:src="@drawable/iconfont_play"/>
         <ImageView
-                android:id="@+id/pause"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/video_stop"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/iconfont_pause" />
+                android:src="@drawable/iconfont_stop"
+                android:layout_alignTop="@+id/video_next"
+                android:layout_toEndOf="@+id/video_next"/>
         <ImageView
-                android:id="@+id/reset"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/video_previous"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/iconfont_reset"/>
+                android:src="@drawable/iconfont_previous"
+                android:layout_alignTop="@+id/video_play"
+                android:layout_toEndOf="@+id/video_play"/>
         <ImageView
-                android:id="@+id/stop"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/video_next"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/iconfont_stop"/>
-    </LinearLayout>
+                android:src="@drawable/iconfont_next"
+                android:layout_alignTop="@+id/video_previous"
+                android:layout_toEndOf="@+id/video_previous"/>
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/video_fullscreen"
+                android:src="@drawable/iconfont_fullscreen"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentEnd="true"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:id="@+id/video_seekBar"
+                android:padding="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/video_stop"
+                android:layout_toStartOf="@id/video_fullscreen"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:thumb="@drawable/seekbar_thumb"
+                android:indeterminate="false"/>
+    </RelativeLayout>
+    <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/video_close"
+            android:src="@drawable/iconfont_close"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="invisible"
+            android:layout_alignTop="@id/surfaceView"
+            android:layout_alignEnd="@id/surfaceView"/>
 </RelativeLayout>

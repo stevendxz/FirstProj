@@ -232,9 +232,9 @@ containing a value of this type.
         public static final int nav_activity=0x7f030004;
         public static final int navigation_activity=0x7f030005;
         public static final int splash_activity=0x7f030006;
-        public static final int video2_activity=0x7f030007;
+        public static final int video2_activity =0x7f030007;
         public static final int video_activity=0x7f030008;
-        public static final int videoplay_activity=0x7f030009;
+        public static final int videoplay_activity_xml =0x7f030009;
     }
     public static final class menu {
         public static final int global=0x7f090000;

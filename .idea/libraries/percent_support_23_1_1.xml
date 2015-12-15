@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="percent-support-23.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/percent-support-23.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

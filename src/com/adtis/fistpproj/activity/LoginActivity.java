@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.adtis.fistpproj.R;
 
+import static com.adtis.fistpproj.util.CustomToast.DisplayToast;
+
 public class LoginActivity extends Activity {
     private ImageView btn_left;
     private ImageView btn_right;
@@ -21,7 +23,7 @@ public class LoginActivity extends Activity {
     }
     public void initLoginView() {
         navgativeView = (NavActivity)super.findViewById(R.id.nav_login);
-        navgativeView.setTitle("Login");
+        navgativeView.setTitle("登录");
         btn_left = (ImageView)navgativeView.findViewById(R.id.iv_nav_back);
         btn_right = (ImageView)navgativeView.findViewById(R.id.iv_nav_right);
         btn_left.setImageResource(R.drawable.iconfont_back);
@@ -30,20 +32,16 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onRightClick() {
-                DisplayToast("点击了右侧按钮!");
+                DisplayToast(context,"点击了右侧按钮!");
             }
 
             @Override
             public void onBackClick() {
-
                 Intent intent = new Intent();
                 intent.setClass(context, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
-    }
-    public void DisplayToast(String str) {
-        Toast.makeText(this, str, Toast.LENGTH_LONG).show();
     }
 }
