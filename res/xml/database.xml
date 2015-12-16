@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <ip_address >192.168.11.130</ip_address>
+    <port>3306</port>
+    <db_name>mysql</db_name>
+    <user_name>root</user_name>
+    <password>toor</password>
+    <characte_encoding>utf-8</characte_encoding>
+    <use_unicode>true</use_unicode>
+</database>

@@ -52,7 +52,7 @@ public class VideoActivity2 extends Activity {
 
     public void initVideoView() {
         nav_videoplayer = (NavActivity)super.findViewById(R.id.nav_videoplayer);
-        nav_videoplayer.setTitle("视频播放");
+        nav_videoplayer.setTitle(R.string.videoplay_title);
         btn_left = (ImageView)nav_videoplayer.findViewById(R.id.iv_nav_back);
         btn_right = (ImageView)nav_videoplayer.findViewById(R.id.iv_nav_right);
         btn_left.setImageResource(R.drawable.iconfont_back);

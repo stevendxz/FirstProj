@@ -9,5 +9,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/slidingmenu"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/percent-support-23.1.1"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jdk1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql-connector-java-commercial-5.1.25-bin"/>
 	<classpathentry kind="output" path="out/production/FirstProj"/>
 </classpath>

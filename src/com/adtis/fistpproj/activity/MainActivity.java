@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawerlayout);
         navigationView = (NavActivity) mDrawerLayout.findViewById(R.id.nav_main);
-        navigationView.setTitle("主页");
+        navigationView.setTitle(R.string.main_title);
         navigationView.setClickCallback(new NavActivity.ClickCallback() {
 
             @Override

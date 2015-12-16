@@ -9,5 +9,6 @@
 		<level name="nineoldandroids-2.4.0" value="project"/>
 		<level name="slidingmenu" value="project"/>
 		<level name="percent-support-23.1.1" value="project"/>
+		<level name="mysql-connector-java-commercial-5.1.25-bin" value="project"/>
 	</levels>
 </component>

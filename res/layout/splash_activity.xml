@@ -11,7 +11,8 @@
               android:padding="12dip"
               android:layout_centerHorizontal="true"
               android:layout_alignParentBottom="true"
-              android:text="by xxxxx 出品"
+              android:text="@string/app_splash_copyright"
+              android:textColor="@android:color/white"
               android:textSize="11sp"/>
     <RelativeLayout android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
@@ -36,6 +37,7 @@
                           android:layout_height="wrap_content"
                           android:padding="6dip"
                           android:text="@string/app_name"
+                          android:textColor="@android:color/white"
                           android:textSize="24sp"/>
                 <TextView android:id="@+id/version_name"
                           android:layout_width="wrap_content"
@@ -48,20 +50,31 @@
                   android:layout_height="1px"
                   android:layout_marginLeft="20dip"
                   android:layout_marginRight="20dip"
-                  android:background="#dddddd"/>
+                  android:background="#FFF"/>
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_gravity="center_horizontal"
                       android:padding="6dip"
-                      android:text="您好！！！"
+                      android:text="@string/app_splash"
+                      android:textColor="@android:color/white"
                       android:textSize="13sp"/>
-            <!--<ProgressBar android:id="@+id/refresh_list_footer_progressbar"-->
-                         <!--android:layout_width="24dip"-->
-                         <!--android:layout_height="24dip"-->
-                         <!--android:indeterminateDrawable="@anim/app_refresh_progress"-->
-                         <!--android:layout_gravity="center"-->
-                         <!--android:indeterminate="false">-->
-            <!--</ProgressBar>-->
+            <!--<ProgressBar android:id="@+id/refresh_list_footer_progressbar"
+                         android:layout_width="24dip"
+                         android:layout_height="24dip"
+                         android:indeterminateDrawable="@anim/app_refresh_progress"
+                         android:layout_gravity="center"
+                         android:indeterminate="false">
+            </ProgressBar>-->
         </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/app_splash_version"
+                android:id="@+id/textView"
+                android:textColor="@android:color/white"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"/>
     </RelativeLayout>
 </RelativeLayout>

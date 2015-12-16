@@ -57,7 +57,7 @@ public class NavActivity extends RelativeLayout implements View.OnClickListener 
      * 设置标题
      * @param title
      */
-    public void setTitle(String title){
+    public void setTitle(int title){
         titleView.setText(title);
     }
 

@@ -38,6 +38,7 @@ public class MenuLeftFragment extends Fragment {
         list.add(new ContentModel(R.drawable.iconfont_video, "视频"));
         list.add(new ContentModel(R.drawable.iconfont_audio, "音频"));
         list.add(new ContentModel(R.drawable.iconfont_about, "关于"));
+        list.add(new ContentModel(R.drawable.iconfont_exit, "退出程序"));
         ListView listView=(ListView) getActivity().findViewById(R.id.left_drawer);
         adapter=new ContentAdapter(getActivity(), list);
         listView.setAdapter(adapter);
@@ -56,6 +57,9 @@ public class MenuLeftFragment extends Fragment {
                         startActivity(intent);
                     case 4:
                     case 5:
+                        break;
+                   case 6:
+                       System.exit(0);
                     default:
                         break;
                 }
@@ -83,4 +87,5 @@ public class MenuLeftFragment extends Fragment {
             }
         });
     }
+
 }
