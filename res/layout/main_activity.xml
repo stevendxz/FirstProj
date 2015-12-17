@@ -6,17 +6,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/main_drawerlayout"
-        android:background="@android:color/white"
+        android:background="@android:color/holo_blue_dark"
         android:theme="@android:style/Theme.NoTitleBar">
-    <FrameLayout
-            android:id="@+id/main_framelayout"
+    <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <com.adtis.fistpproj.activity.NavActivity
-                android:id="@+id/nav_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-    </FrameLayout>
+            android:layout_height="match_parent" android:orientation="vertical">
+        <FrameLayout
+                android:id="@+id/main_framelayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            <com.adtis.fistpproj.activity.NavActivity
+                    android:id="@+id/nav_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <fragment
+                android:id="@+id/fragment_cycle_viewpager_content"
+                android:name="com.adtis.fistpproj.util.CycleViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dip" />
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
     <fragment
             android:id="@+id/id_left_menu"
             android:name="com.adtis.fistpproj.activity.MenuLeftFragment"
