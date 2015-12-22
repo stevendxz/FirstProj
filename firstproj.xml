@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="firstproj" default="all">
+  
+  
+  <property file="firstproj.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.android_5.1.1_google_apis" value="${jdk.home.android_5.1.1_google_apis}/../../Program Files/Java/jdk1.8.0_60/bin"/>
+  <path id="jdk.classpath.android_5.1.1_google_apis">
+    <fileset dir="${jdk.home.android_5.1.1_google_apis}">
+      <include name="platforms/android-22/android.jar"/>
+      <include name="add-ons/addon-google_apis-google-22/libs/usb.jar"/>
+      <include name="add-ons/addon-google_apis-google-22/libs/effects.jar"/>
+      <include name="add-ons/addon-google_apis-google-22/libs/maps.jar"/>
+      <include name="platforms/android-22/data/res"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.android_api_22_platform}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.android_api_22_platform}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.android_api_22_platform"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.android-support-v4.classpath">
+    <pathelement location="${basedir}/libs/android-support-v4.jar"/>
+  </path>
+  
+  <path id="library.android-support-v7-appcompat.classpath">
+    <pathelement location="${basedir}/libs/android-support-v7-appcompat.jar"/>
+  </path>
+  
+  <path id="library.mysql-connector-java-commercial-5.1.25-bin.classpath">
+    <pathelement location="${basedir}/libs/mysql-connector-java-commercial-5.1.25-bin.jar"/>
+  </path>
+  
+  <path id="library.nineoldandroids-2.4.0.classpath">
+    <pathelement location="${basedir}/libs/nineoldandroids-2.4.0.jar"/>
+  </path>
+  
+  <path id="library.percent-support-23.1.1.classpath">
+    <pathelement location="${basedir}/libs/percent-support-23.1.1.jar"/>
+  </path>
+  
+  <path id="library.slidingmenu.classpath">
+    <pathelement location="${basedir}/libs/slidingmenu.jar"/>
+  </path>
+  
+  <path id="library.universal-image-loader-1.8.6-with-sources.classpath">
+    <pathelement location="${basedir}/libs/universal-image-loader-1.8.6-with-sources.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  
+  <path id="library.jdk1.8.classpath"/>
+  
+  
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_firstproj.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.firstproj" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.firstproj" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>

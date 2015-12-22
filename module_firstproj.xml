@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_firstproj" default="compile.module.firstproj">
+  <dirname property="module.firstproj.basedir" file="${ant.file.module_firstproj}"/>
+  
+  <property name="module.jdk.home.firstproj" value="${jdk.home.android_5.1.1_google_apis}"/>
+  <property name="module.jdk.bin.firstproj" value="${jdk.bin.android_5.1.1_google_apis}"/>
+  <property name="module.jdk.classpath.firstproj" value="jdk.classpath.android_5.1.1_google_apis"/>
+  
+  <property name="compiler.args.firstproj" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="firstproj.output.dir" value="${module.firstproj.basedir}/out/production/FirstProj"/>
+  <property name="firstproj.testoutput.dir" value="${module.firstproj.basedir}/out/test/FirstProj"/>
+  
+  <path id="firstproj.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="firstproj.module.production.classpath">
+    <path refid="${module.jdk.classpath.firstproj}"/>
+    <path refid="library.android-support-v4.classpath"/>
+    <path refid="library.android-support-v7-appcompat.classpath"/>
+    <path refid="library.nineoldandroids-2.4.0.classpath"/>
+    <path refid="library.slidingmenu.classpath"/>
+    <path refid="library.percent-support-23.1.1.classpath"/>
+    <path refid="library.jdk1.8.classpath"/>
+    <path refid="library.mysql-connector-java-commercial-5.1.25-bin.classpath"/>
+    <path refid="library.universal-image-loader-1.8.6-with-sources.classpath"/>
+  </path>
+  
+  <path id="firstproj.runtime.production.module.classpath">
+    <path refid="library.android-support-v4.classpath"/>
+    <path refid="library.android-support-v7-appcompat.classpath"/>
+    <path refid="library.nineoldandroids-2.4.0.classpath"/>
+    <path refid="library.slidingmenu.classpath"/>
+    <path refid="library.percent-support-23.1.1.classpath"/>
+    <path refid="library.jdk1.8.classpath"/>
+    <path refid="library.mysql-connector-java-commercial-5.1.25-bin.classpath"/>
+    <pathelement location="${firstproj.output.dir}"/>
+    <path refid="library.universal-image-loader-1.8.6-with-sources.classpath"/>
+  </path>
+  
+  <path id="firstproj.module.classpath">
+    <path refid="${module.jdk.classpath.firstproj}"/>
+    <path refid="library.android-support-v4.classpath"/>
+    <path refid="library.android-support-v7-appcompat.classpath"/>
+    <path refid="library.nineoldandroids-2.4.0.classpath"/>
+    <path refid="library.slidingmenu.classpath"/>
+    <path refid="library.percent-support-23.1.1.classpath"/>
+    <path refid="library.jdk1.8.classpath"/>
+    <path refid="library.mysql-connector-java-commercial-5.1.25-bin.classpath"/>
+    <pathelement location="${firstproj.output.dir}"/>
+    <path refid="library.universal-image-loader-1.8.6-with-sources.classpath"/>
+  </path>
+  
+  <path id="firstproj.runtime.module.classpath">
+    <path refid="library.android-support-v4.classpath"/>
+    <path refid="library.android-support-v7-appcompat.classpath"/>
+    <path refid="library.nineoldandroids-2.4.0.classpath"/>
+    <path refid="library.slidingmenu.classpath"/>
+    <path refid="library.percent-support-23.1.1.classpath"/>
+    <path refid="library.jdk1.8.classpath"/>
+    <path refid="library.mysql-connector-java-commercial-5.1.25-bin.classpath"/>
+    <pathelement location="${firstproj.testoutput.dir}"/>
+    <pathelement location="${firstproj.output.dir}"/>
+    <path refid="library.universal-image-loader-1.8.6-with-sources.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.firstproj">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.firstproj">
+    <patternset refid="excluded.from.module.firstproj"/>
+  </patternset>
+  
+  <path id="firstproj.module.sourcepath">
+    <dirset dir="${module.firstproj.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.firstproj" depends="compile.module.firstproj.production,compile.module.firstproj.tests" description="Compile module FirstProj"/>
+  
+  <target name="compile.module.firstproj.production" depends="register.custom.compilers" description="Compile module FirstProj; production classes">
+    <mkdir dir="${firstproj.output.dir}"/>
+    <javac2 destdir="${firstproj.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.firstproj}/javac">
+      <compilerarg line="${compiler.args.firstproj}"/>
+      <bootclasspath refid="firstproj.module.bootclasspath"/>
+      <classpath refid="firstproj.module.production.classpath"/>
+      <src refid="firstproj.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.firstproj"/>
+    </javac2>
+    
+    <copy todir="${firstproj.output.dir}">
+      <fileset dir="${module.firstproj.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.firstproj.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.firstproj.tests" depends="register.custom.compilers,compile.module.firstproj.production" description="compile module FirstProj; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.firstproj" description="cleanup module">
+    <delete dir="${firstproj.output.dir}"/>
+    <delete dir="${firstproj.testoutput.dir}"/>
+  </target>
+</project>

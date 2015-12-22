@@ -48,6 +48,9 @@ public class MenuLeftFragment extends Fragment {
                 Log.v("MSG:","点击了"+list.get(position).getText());
                switch (position) {
                     case 0:
+                        Intent intent0 = new Intent();
+                        intent0.setClass(getActivity(), UserHomeActivity.class);
+                        startActivity(intent0);
                     case 1:
                     case 2:
                         break;

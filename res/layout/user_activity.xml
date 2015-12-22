@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="#FFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.adtis.fistpproj.activity.NavActivity
+            android:id="@+id/nav_usercenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <RelativeLayout
+            android:id="@+id/usercenter_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#00EEFF">
+        <com.adtis.fistpproj.util.CircularImageView
+                android:id="@+id/usercenter_user_head"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/logo"
+                app:border="false"
+                app:shadow="true"
+                app:shadow_color="#FFF"
+                app:shadow_radius="10">
+        </com.adtis.fistpproj.util.CircularImageView>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/usercenter_username"
+                android:text="UserName"
+                android:textColor="@android:color/white"
+                android:textSize="12pt"
+                android:layout_marginBottom="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textIsSelectable="false"
+                android:textStyle="bold"
+                android:gravity="center_vertical"/>
+    </RelativeLayout>
+    <!--<fragment
+            android:id="@+id/usercenter_menu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:name="com.adtis.fistpproj.activity.UserCenterMenuFragment"
+            android:orientation="horizontal"
+            android:background="#EEE">
+    </fragment>-->
+
+</LinearLayout>

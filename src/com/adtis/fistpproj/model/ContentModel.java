@@ -10,6 +10,10 @@ public class ContentModel {
 		this.imageView = imageView;
 		this.text = text;
 	}
+	public ContentModel(String text) {
+		super();
+		this.text = text;
+	}
 
 	public int getImageView() {
 		return imageView;

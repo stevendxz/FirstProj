@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.adtis.fistpproj.R;
+import com.adtis.fistpproj.cycleviewpager.lib.BaseViewPager;
 import com.adtis.fistpproj.model.ADInfo;
 import com.adtis.fistpproj.util.CustomToast;
 import com.adtis.fistpproj.util.CycleViewPager;
@@ -73,22 +74,23 @@ public class MainActivity extends Activity {
             }
         });
 
+
         /*** 初始化侧滑菜单 Begin ***/
         menu = new SlidingMenu(context);
         menu.setMode(SlidingMenu.LEFT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
         menu.setShadowDrawable(R.drawable.shadow);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setMenu(R.layout.menu_activity);
+
         /*** 初始化侧滑菜单 End ***/
     }
 
     @SuppressLint("NewApi")
     private void initialize() {
-
         cycleViewPager = (CycleViewPager) getFragmentManager().findFragmentById(R.id.fragment_cycle_viewpager_content);
 
         for (int i = 0; i < imageUrls.length; i++) {
@@ -119,6 +121,33 @@ public class MainActivity extends Activity {
         //设置圆点指示图标组居中显示，默认靠右
         cycleViewPager.setIndicatorCenter();
 
+        BaseViewPager view01 = cycleViewPager.getViewPager();
+
+        view01.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        ismove = true;
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        ismove = true;
+                        break;
+                    case MotionEvent.ACTION_UP:
+//                        int scrollX = getScrollX();
+//                        if (scrollX > mHalfMenuWidth)
+//                            this.smoothScrollTo(mMenuWidth, 0);
+//                        else
+//                            this.smoothScrollTo(0, 0);
+//                        return true;
+                        ismove = false;
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     private CycleViewPager.ImageCycleViewListener mAdCycleViewListener = new CycleViewPager.ImageCycleViewListener() {
@@ -131,32 +160,6 @@ public class MainActivity extends Activity {
                         "position-->" + info.getContent(), Toast.LENGTH_SHORT)
                         .show();
             }
-        }
-    };
-
-    private CycleViewPager.ImageCycleViewTouchListener adCycleViewTouchListener = new CycleViewPager.ImageCycleViewTouchListener() {
-        @Override
-        public boolean isCanMove(View view) {
-            view.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            ismove = true;
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            ismove = true;
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            ismove = false;
-                            break;
-                        default:
-                            break;
-                    }
-                    return false;
-                }
-            });
-            return false;
         }
     };
 

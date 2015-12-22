@@ -36,4 +36,6 @@
     <string name="videoplay_title">视频播放</string>
     <string name="filename">视频文件名称</string>
     <string name="filenoexsit">视频文件不存在</string>
+
+    <string name="usercenter_title">用户中心</string>
 </resources>

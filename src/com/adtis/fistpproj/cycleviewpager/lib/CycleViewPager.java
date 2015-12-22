@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.adtis.fistpproj.R;
 import com.adtis.fistpproj.model.ADInfo;
+import com.slidingmenu.lib.SlidingMenu;
 
 /**
  * 实现可循环，可轮播的viewpager
@@ -44,6 +45,7 @@ public class CycleViewPager extends Fragment implements OnPageChangeListener {
 	private int WHEEL_WAIT = 101; // 等待
 	private ImageCycleViewListener mImageCycleViewListener;
 	private List<ADInfo> infos;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

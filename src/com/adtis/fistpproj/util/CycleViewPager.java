@@ -10,7 +10,6 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -343,7 +342,6 @@ public class CycleViewPager extends Fragment implements OnPageChangeListener {
 		}
 		setIndicator(position);
 	}
-
 	/**
 	 * 设置viewpager是否可以滚动
 	 * 
@@ -395,9 +393,5 @@ public class CycleViewPager extends Fragment implements OnPageChangeListener {
 		 * 单击图片事件
 		 */
 		public void onImageClick(ADInfo info, int postion, View imageView);
-	}
-
-	public static interface ImageCycleViewTouchListener {
-		public boolean isCanMove(View view);
 	}
 }

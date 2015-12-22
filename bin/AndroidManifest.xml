@@ -26,8 +26,6 @@
                 android:name=".activity.VideoActivity2"/>
         <activity
                 android:name=".activity.RegisterActivity"/>
-        <activity
-                android:name=".activity.UserHomeActivity"/>
     </application>
     <!-- 赋予网络权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
