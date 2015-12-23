@@ -49,7 +49,7 @@ public class MenuLeftFragment extends Fragment {
                switch (position) {
                     case 0:
                         Intent intent0 = new Intent();
-                        intent0.setClass(getActivity(), UserHomeActivity.class);
+                        intent0.setClass(getActivity(), UserCenterActivity.class);
                         startActivity(intent0);
                     case 1:
                     case 2:
