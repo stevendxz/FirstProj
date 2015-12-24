@@ -13,7 +13,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DBNAME = "mydb.db";
 
     private static final String CREATE_SQL = "create table user(_id integer primary key autoincrement,username varchar(16)," +
-            "email varchar(255),password varchar(64),date varchar(255))";
+            "email varchar(255),password varchar(64),phone varchar(255),date varchar(255))";
 
     public DBOpenHelper(Context context) {
         super(context, DBNAME, null, VERSION);

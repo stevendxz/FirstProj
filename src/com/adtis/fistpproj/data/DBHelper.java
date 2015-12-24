@@ -17,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_USERNAME = "username";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_PASSWORD = "password";
+        public static final String COLUMN_PHONE = "phone";
         public static final String COLUMN_DATE = "date";
     }
 
@@ -29,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     FeedEntry.COLUMN_USERNAME + "VARCHAR(16)" + COMMA_SEP +
                     FeedEntry.COLUMN_EMAIL + "VARCHAR(255)" + COMMA_SEP +
                     FeedEntry.COLUMN_PASSWORD + "VARCHAR(16)" + COMMA_SEP +
+                    FeedEntry.COLUMN_PHONE + "VARCHAR(255)" + COMMA_SEP +
                     FeedEntry.COLUMN_DATE + "VARCHAR(255)" + COMMA_SEP +
             " )";
 

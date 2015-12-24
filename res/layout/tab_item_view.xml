@@ -23,7 +23,7 @@
     </TextView>
     <ImageView
             android:id="@+id/imageview"
-            android:background="@color/dodgerblue"
+            android:background="@drawable/tab_image_select"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_alignBottom="@+id/textview"

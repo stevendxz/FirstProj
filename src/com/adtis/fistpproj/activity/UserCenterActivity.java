@@ -102,7 +102,7 @@ public class UserCenterActivity extends FragmentActivity {
     private View getTabItemView(int index) {
         View view = mLayoutInflater.inflate(R.layout.tab_item_view, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
-        imageView.setBackgroundResource(R.drawable.tab_line_select);
+        imageView.setBackgroundResource(R.drawable.tab_image_select);
         TextView textView = (TextView) view.findViewById(R.id.textview);
         textView.setText(mTextArray[index]);
         /*textView.setTextColor(getResources().getColor(R.color.gray));

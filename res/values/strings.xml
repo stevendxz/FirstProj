@@ -16,6 +16,7 @@
     <string name="reg_title">注册</string>
     <string name="reg_username">用户名</string>
     <string name="reg_email">邮箱</string>
+    <string name="reg_phone">电话</string>
     <string name="reg_password">密码</string>
     <string name="reg_confirmpwd">确认密码</string>
     <string name="reg_btn">注册</string>
@@ -38,4 +39,5 @@
     <string name="filenoexsit">视频文件不存在</string>
 
     <string name="usercenter_title">用户中心</string>
+    <string name="usercenter_username">清风明月</string>
 </resources>

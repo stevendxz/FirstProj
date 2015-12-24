@@ -19,6 +19,10 @@ public class UserInfoDAO implements UserInfoDAOImpl {
     private static final String INSERT_DEFAULT_SQL = "insert into user(username,email,password) values('admin','admin@admin.com','admin')";
     private static final String INSERT_USER_SQL = "insert into user(username,email,password,date) values(?,?,?,?)";
     private static final String FIND_ALLUSER_SQL = "select * from user";
+    private static final String FIND_USER_BY_USERNAME_SQL = "select * from user where username=?";
+    private static final String FIND_USER_BY_ID_SQL = "select * from user where _id=?";
+    private static final String UPDATE_USER_BY_USERNAME_SQL = "update user set email=?,phone=? where username=?";
+    private static final String FIND_LOGIN_SQL = "select * from user where email=? and password=?;";
     private static final String FIND_COUNTS_SQL = "select count(*) from user";
 
     public UserInfoDAO(Context context) {
@@ -28,8 +32,7 @@ public class UserInfoDAO implements UserInfoDAOImpl {
     @Override
     public List<UserInfo> findByEmailAndPwd(String email, String pwd) {
         db = helper.getWritableDatabase();
-        String select_login_sql = "select * from user where email=? and password=?;";
-        Cursor cursor = db.rawQuery(select_login_sql, new String[]{
+        Cursor cursor = db.rawQuery(FIND_LOGIN_SQL, new String[]{
                 String.valueOf(email), String.valueOf(pwd)
         });
         List<UserInfo> list = new ArrayList<UserInfo>();
@@ -38,26 +41,55 @@ public class UserInfoDAO implements UserInfoDAOImpl {
             String _username = cursor.getString(cursor.getColumnIndex("username"));
             String _email = cursor.getString(cursor.getColumnIndex("email"));
             String _password = cursor.getString(cursor.getColumnIndex("password"));
+            String _phone = cursor.getString(cursor.getColumnIndex("phone"));
             String _date = cursor.getString(cursor.getColumnIndex("date"));
             Log.v("\nUSERINFO", "\nID ==> " + _id +
                     "\nUSERNAME ==> " + _username +
                     "\nEMAIL ==> " + _email +
                     "\nPASSWORD ==> " + _password +
                     "\nDATE ==> " + _date);
-            UserInfo info = new UserInfo(_id, _username, _email, _password, _date);
+            UserInfo info = new UserInfo(_id, _username, _email, _password, _phone, _date);
             Log.v("USERINFO", info.toString());
-            list.add(new UserInfo(_id, _username, _email, _password, _date));
+            Log.v("\nMSG ", "查询用户信息成功");
+            list.add(new UserInfo(_id, _username, _email, _password, _phone, _date));
         }
         return list;
     }
 
     @Override
     public List<UserInfo> findAllUserInfo() {
+        db = helper.getWritableDatabase();
         List<UserInfo> list = new ArrayList<UserInfo>();
         Cursor cursor = db.rawQuery(FIND_ALLUSER_SQL, null);
         if (cursor.moveToNext()) {
             int _id = cursor.getInt(cursor.getColumnIndex("_id"));
             String _username = cursor.getString(cursor.getColumnIndex("username"));
+            String _email = cursor.getString(cursor.getColumnIndex("email"));
+            String _password = cursor.getString(cursor.getColumnIndex("password"));
+            String _phone = cursor.getString(cursor.getColumnIndex("phone"));
+            String _date = cursor.getString(cursor.getColumnIndex("date"));
+            Log.v("\nUSERINFO ", "\nID ==> " + _id +
+                    "\nUSERNAME ==> " + _username +
+                    "\nEMAIL ==> " + _email +
+                    "\nPASSWORD ==> " + _password +
+                    "\nDATE ==> " + _date);
+            UserInfo info = new UserInfo(_id, _username, _email, _password, _phone, _date);
+            Log.v("USERINFO", info.toString());
+            Log.v("\nMSG ", "查询用户信息成功");
+            list.add(new UserInfo(_id, _username, _email, _password, _phone, _date));
+        }
+        return list;
+    }
+
+    @Override
+    public UserInfo findUserInfoByID(int id) {
+        db = helper.getWritableDatabase();
+        UserInfo info = new UserInfo();
+        Cursor cursor = db.rawQuery(FIND_USER_BY_ID_SQL, new String[]{String.valueOf(id)});
+        if (cursor.moveToNext()) {
+            int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            String _username = cursor.getString(cursor.getColumnIndex("username"));
+            String _phone = cursor.getString(cursor.getColumnIndex("phone"));
             String _email = cursor.getString(cursor.getColumnIndex("email"));
             String _password = cursor.getString(cursor.getColumnIndex("password"));
             String _date = cursor.getString(cursor.getColumnIndex("date"));
@@ -66,11 +98,33 @@ public class UserInfoDAO implements UserInfoDAOImpl {
                     "\nEMAIL ==> " + _email +
                     "\nPASSWORD ==> " + _password +
                     "\nDATE ==> " + _date);
-            UserInfo info = new UserInfo(_id, _username, _email, _password, _date);
-            Log.v("USERINFO", info.toString());
-            list.add(new UserInfo(_id, _username, _email, _password, _date));
+            Log.v("\nMSG ", "查询用户信息成功");
+            info = new UserInfo(_id, _username, _email, _password, _phone, _date);
         }
-        return list;
+        return info;
+    }
+
+    @Override
+    public UserInfo findUserInfoByUserName(String username) {
+        db = helper.getWritableDatabase();
+        UserInfo info = new UserInfo();
+        Cursor cursor = db.rawQuery(FIND_USER_BY_USERNAME_SQL, new String[]{String.valueOf(username)});
+        if (cursor.moveToNext()) {
+            int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            String _username = cursor.getString(cursor.getColumnIndex("username"));
+            String _email = cursor.getString(cursor.getColumnIndex("email"));
+            String _password = cursor.getString(cursor.getColumnIndex("password"));
+            String _phone = cursor.getString(cursor.getColumnIndex("phone"));
+            String _date = cursor.getString(cursor.getColumnIndex("date"));
+            Log.v("\nUSERINFO ", "\nID ==> " + _id +
+                    "\nUSERNAME ==> " + _username +
+                    "\nEMAIL ==> " + _email +
+                    "\nPASSWORD ==> " + _password +
+                    "\nDATE ==> " + _date);
+            Log.v("\nMSG ", "查询用户信息成功");
+            info = new UserInfo(_id, _username, _email, _password, _phone,  _date);
+        }
+        return info;
     }
 
     @Override
@@ -82,6 +136,18 @@ public class UserInfoDAO implements UserInfoDAOImpl {
                 info.getPassword(),
                 info.getDate()
         });
+        Log.v("\nMSG ", "添加用户信息成功");
+    }
+
+    @Override
+    public void updateUserInfo(UserInfo info) {
+        db = helper.getWritableDatabase();
+        db.execSQL(UPDATE_USER_BY_USERNAME_SQL,new String[]{
+                info.getEmail(),
+                info.getPhone(),
+                info.getUsername()
+        });
+        Log.v("\nMSG ", "更新用户信息成功");
     }
 
     @Override

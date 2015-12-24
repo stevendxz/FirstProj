@@ -10,19 +10,28 @@ public class UserInfo {
     private String username;
     private String email;
     private String password;
+    private String phone;
     private String date;
-    public UserInfo() {
-        super();
-    }
-    public UserInfo(int id, String username, String email, String password, String date){
-        super();
+
+    public UserInfo(int id, String username, String email, String password, String phone, String date) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.phone = phone;
         this.date = date;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public UserInfo() {
+        super();
+    }
     public int getId() {
         return id;
     }
@@ -70,6 +79,7 @@ public class UserInfo {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
                 ", date='" + date + '\'' +
                 '}';
     }

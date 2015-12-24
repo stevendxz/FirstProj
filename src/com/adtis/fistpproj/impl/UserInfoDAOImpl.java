@@ -10,6 +10,9 @@ import java.util.List;
 public interface UserInfoDAOImpl {
     public List<UserInfo> findByEmailAndPwd(String email, String pwd);
     public List<UserInfo> findAllUserInfo();
+    public UserInfo findUserInfoByID(int id);
+    public UserInfo findUserInfoByUserName(String username);
     public void insertUserInfo(UserInfo info);
+    public void updateUserInfo(UserInfo info);
     public int getCounts();
 }

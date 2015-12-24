@@ -7,11 +7,12 @@
             android:id="@android:id/tabhost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@drawable/tab_bg">
         <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+            android:background="@drawable/tab_bg" />
     </android.support.v4.app.FragmentTabHost>
     <FrameLayout
             android:id="@+id/realtabcontent"

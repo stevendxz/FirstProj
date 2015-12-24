@@ -74,6 +74,7 @@ public class VideoActivity2 extends Activity {
             }
         });
         uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()+"/test.mp4");
+        //uri = Uri.parse("http://v.yinyuetai.com/video/2446190");
         videoView = (VideoView)this.findViewById(R.id.videoView);
         videoView.setVideoURI(uri);
         btn_play = (ImageView)findViewById(R.id.play);
