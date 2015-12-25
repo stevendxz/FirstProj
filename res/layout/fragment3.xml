@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#9BD14B">
-    
+<com.adtis.fistpproj.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
 
-</LinearLayout>
+    <!--<com.adtis.fistpproj.percent.PercentRelativeLayout
+            android:id="@+id/list_layout"
+            android:background="@drawable/view_round_rect"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="90%"
+            app:layout_widthPercent="90%"
+            android:layout_centerInParent="true">-->
+    <com.adtis.fistpproj.adapter.MyListView
+            android:id="@+id/mylistview_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="90%"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/list_default_round"
+            android:cacheColorHint="#00000000">
+
+    </com.adtis.fistpproj.adapter.MyListView>
+
+    <!--<com.adtis.fistpproj.adapter.MyExplandableListView
+            android:id="@+id/id_expandablelist"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+    />-->
+    <!-- </com.adtis.fistpproj.percent.PercentRelativeLayout>-->
+
+</com.adtis.fistpproj.percent.PercentRelativeLayout>

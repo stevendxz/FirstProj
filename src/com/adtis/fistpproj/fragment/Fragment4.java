@@ -111,9 +111,9 @@ public class Fragment4 extends Fragment {
     }
 
     public UserInfo getUserInfo() {
-        UserInfo info = new UserInfo();
         UserInfoDAO dao = new UserInfoDAO(getActivity());
-        info = dao.findUserInfoByUserName("admin");
+        UserInfo info = dao.findUserInfoByUserName("admin");
+        Log.v("\n获取用户信息：", info.toString());
         return info;
     }
 }

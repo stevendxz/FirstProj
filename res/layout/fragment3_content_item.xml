@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.adtis.fistpproj.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="90%"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white">
+    <TextView
+            android:id="@+id/friend_item_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:text="123"
+            android:textColor="@color/black"/>
+    <ImageView
+            android:id="@+id/friend_item_imageview"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/friend_item_textview"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/iconfont_right"/>
+</com.adtis.fistpproj.percent.PercentRelativeLayout>
