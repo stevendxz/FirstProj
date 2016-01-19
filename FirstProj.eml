@@ -12,5 +12,6 @@
 		<level name="mysql-connector-java-commercial-5.1.25-bin" value="project"/>
 		<level name="universal-image-loader-1.8.6-with-sources" value="project"/>
 		<level name="commons-collections4-4.1" value="project"/>
+		<level name="core-3.1.0" value="project"/>
 	</levels>
 </component>

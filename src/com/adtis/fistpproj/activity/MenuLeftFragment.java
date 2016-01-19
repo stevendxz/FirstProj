@@ -37,6 +37,7 @@ public class MenuLeftFragment extends Fragment {
         list.add(new ContentModel(R.drawable.iconfont_collection, "收藏"));
         list.add(new ContentModel(R.drawable.iconfont_video, "视频"));
         list.add(new ContentModel(R.drawable.iconfont_audio, "音频"));
+        list.add(new ContentModel(R.drawable.iconfont_audio, "二维码生成"));
         list.add(new ContentModel(R.drawable.iconfont_about, "关于"));
         list.add(new ContentModel(R.drawable.iconfont_exit, "退出程序"));
         ListView listView=(ListView) getActivity().findViewById(R.id.left_drawer);
@@ -55,12 +56,14 @@ public class MenuLeftFragment extends Fragment {
                     case 2:
                         break;
                     case 3:
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), VideoActivity2.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent();
+                        intent1.setClass(getActivity(), VideoActivity2.class);
+                        startActivity(intent1);
                     case 4:
                     case 5:
-                        break;
+                        Intent intent2 = new Intent();
+                        intent2.setClass(getActivity(), QRCreateActivity.class);
+                        startActivity(intent2);
                    case 6:
                        System.exit(0);
                     default:
